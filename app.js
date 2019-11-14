@@ -5,18 +5,19 @@ const main = require ("./views/main");
 const wikiRouter = require('./routes/wiki');
 const userRouter = require('./routes/user');
 const pg = require('pg');
-//f
+const addPage = require('./views/addpage'); 
+
 let app = express()
 
 
 const { db, Page, User } = require('./models');
 
-app.use('/wiki', wikiRouter);
-app.use('/user', userRouter);
-
 app.use(express.static(__dirname + "/public"));
 app.use(express.urlencoded({extended : false}));
+app.use(express.json()); 
 
+app.use('/wiki', wikiRouter);
+app.use('/user', userRouter);
 
 app.get('/', (req, res) => {
     res.send(layout(''))
